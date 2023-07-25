@@ -11,7 +11,7 @@ import { IssuesService } from '../issues.service';
   styleUrls: ['./issue-report.component.css'],
 })
 export class IssueReportComponent implements OnInit {
-  issueForm = new FormGroup<IssueForm>({
+  addIssueForm = new FormGroup<IssueForm>({
     title: new FormControl('', {
       nonNullable: true,
       validators: Validators.required,
@@ -32,18 +32,18 @@ export class IssueReportComponent implements OnInit {
   constructor(private issuesService: IssuesService) {}
 
   ngOnInit(): void {
-    this.issueForm.controls.title.valueChanges.subscribe((title) => {
+    this.addIssueForm.controls.title.valueChanges.subscribe((title) => {
       this.suggestions = this.issuesService.getSuggestions(title);
     });
   }
 
   addIssue() {
-    if (this.issueForm && this.issueForm.invalid) {
-      this.issueForm.markAllAsTouched();
+    if (this.addIssueForm && this.addIssueForm.invalid) {
+      this.addIssueForm.markAllAsTouched();
       return;
     }
 
-    this.issuesService.createIssue(this.issueForm.getRawValue() as Issue);
+    this.issuesService.createIssue(this.addIssueForm.getRawValue() as Issue);
     this.formClose.emit();
   }
 }

@@ -10,7 +10,8 @@ import { Issue } from '../issue';
 export class IssueListComponent implements OnInit {
   issues: Issue[] = [];
   showReportIssue = false;
-  selectedIssue: Issue | null = null;
+  selectedIssueResolve: Issue | null = null;
+  selectedIssueEdit: Issue | null = null;
 
   constructor(private issuesService: IssuesService) {}
 
@@ -25,10 +26,14 @@ export class IssueListComponent implements OnInit {
     this.getIssues();
   }
   onConfirm(confirmed: boolean) {
-    if (confirmed && this.selectedIssue) {
-      this.issuesService.completeIssue(this.selectedIssue);
+    if (confirmed && this.selectedIssueResolve) {
+      this.issuesService.completeIssue(this.selectedIssueResolve);
       this.getIssues();
     }
-    this.selectedIssue = null;
+    this.selectedIssueResolve = null;
+  }
+  onEditModalClose() {
+    this.getIssues();
+    this.selectedIssueEdit = null;
   }
 }

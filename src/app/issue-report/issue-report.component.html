@@ -1,5 +1,5 @@
 <h3>Report an issue</h3>
-<form (ngSubmit)="addIssue()" clrForm *ngIf="issueForm" [formGroup]="issueForm">
+<form (ngSubmit)="addIssue()" clrForm *ngIf="addIssueForm" [formGroup]="addIssueForm">
   <clr-input-container>
     <label>Title</label>
     <input clrInput formControlName="title" />

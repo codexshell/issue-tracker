@@ -1,4 +1,4 @@
-export interface Issue {
+export type Issue = {
   issueNo: number;
   title: string;
   description: string;
